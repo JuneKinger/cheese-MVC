@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- tells intellij that the file we are trying to use
+should conform to the thymeleaf extension of xml.
+A side effect of this is stricter standards on our html
+eg. all tags MUST be closed: ... "UTF-8" />
+-->
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- add a self-closing / to conform to thymeleaf xml -->
+    <meta charset="UTF-8" />
+    <title th:text="${title}">Title</title>
+</head>
+<body>
+    <h1 th:text="${title}">Default Title</h1>
+
+    <!-- if model.addAttribute("cheeses", cheeses); was missing -->
+    <!-- unless this value exists, I want to display this message -->
+    <!-- if ${cheeses} does not exist, display "no cheese" message -->
+
+    <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :( </p>
+    <a href="/cheese/add">Add Cheese</a>
+    <ul>
+        <!-- ${ tells Thymeleaf to look in the Model for the value named cheeses -->
+        <!-- th:each means repeat the <li> tag for each element in the list -->
+        <!-- th:text="${cheese} accesses data/inserts text from the iterator variable -->
+        <li th:each="cheese : ${cheeses}" th:text="${cheese}"></li>
+    </ul>
+</body>
+</html>

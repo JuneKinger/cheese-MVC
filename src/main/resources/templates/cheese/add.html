@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- add a self-closing / to conform to thymeleaf xml -->
+    <meta charset="UTF-8" />
+    <title th:text="${title}">Title</title>
+</head>
+<body>
+<h1 th:text="${title}">Default Title</h1>
+
+<!-- when the user submits the form, it goes to action=url or if you leave off -->
+<!-- the action attribute, it goes to default path of where the form lives at -->
+<!-- which is localhost:8080/cheese/add -->
+<form method="post">
+    <!-- browser posts parameter name= to the server which corresponds to @RequestParam -->
+    <input type="text" name="cheeseName" />
+    <input type="submit" value="Add Cheese" />
+</form>
+
+</body>
+</html>
