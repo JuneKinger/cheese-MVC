@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<!-- tells intellij that the file we are trying to use
-should conform to the thymeleaf extension of xml.
-A side effect of this is stricter standards on our html
-eg. all tags MUST be closed: ... "UTF-8" />
--->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!-- add a self-closing / to conform to thymeleaf xml -->
-    <meta charset="UTF-8" />
-    <title th:text="${title}">Title</title>
-</head>
-<body>
-    <h1 th:text="${title}">Default Title</h1>
+<body class="container">
 
-    <!-- if model.addAttribute("cheeses", cheeses); was missing -->
-    <!-- unless this value exists, I want to display this message -->
-    <!-- if ${cheeses} does not exist, display "no cheese" message -->
+<h1 th:text="${title}">Default Title</h1>
 
-    <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :( </p>
-    <a href="/cheese/add">Add Cheese</a>
-    <ul>
-        <!-- ${ tells Thymeleaf to look in the Model for the value named cheeses -->
-        <!-- th:each means repeat the <li> tag for each element in the list -->
-        <!-- th:text="${cheese} accesses data/inserts text from the iterator variable -->
-        <li th:each="cheese : ${cheeses}" th:text="${cheese}"></li>
-    </ul>
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th></html>
+        <!-- display the type -->
+        <th>Type</th>
+    </tr>
+
+    <tr th:each="cheese : ${cheeses}">
+        <td th:text="${cheese.name}"></td>
+        <td th:text="${cheese.description}"></td>
+        <!-- first access the type property of my cheese and then access the name property
+        using the getter on the cheese type that is associated with the given cheese -->
+        <td th:text="${cheese.type.name}"></td>
+    </tr>
+
+</table>
+
 </body>
 </html>
